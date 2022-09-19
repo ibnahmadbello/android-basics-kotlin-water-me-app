@@ -19,6 +19,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.Data
+import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.waterme.data.DataSource
@@ -44,7 +45,7 @@ class PlantViewModel(application: Application): ViewModel() {
             .setInitialDelay(duration, unit)
             .build()
 
-        workManager.enqueue(waterRequest)
+        workManager.enqueueUniqueWork(plantName, ExistingWorkPolicy.REPLACE, waterRequest)
     }
 }
 
